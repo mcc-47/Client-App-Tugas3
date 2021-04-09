@@ -53,8 +53,8 @@ and open the template in the editor.
     <body>
     <!-- bagian header template -->
 	<header>
-		<h1 class="judul">Kelompok 2</h1>
-		<p class="deskripsi">JAKA ZAKI</p>
+<!--		<h1 class="judul">Kelompok 2</h1>
+		<p class="deskripsi">JAKA ZAKI</p>-->
 	</header>
 	<!-- akhir bagian header template -->
 	
@@ -62,12 +62,20 @@ and open the template in the editor.
 		<!-- bagian menu		 -->
 		<nav class="menu">
 			<ul>
-				<li>
-					<a href="#">Log Out</a>
-				</li>
-				<li>
-					<a href="#">Employee</a>
-				</li>
+                            <li>
+                                    <a href="/dashboard">Dashboard</a>
+                            </li>
+                            <li>
+                                    <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                    <a href="#">Contact</a>
+                            </li>
+                            <div class="d-flex justify-content-end">
+                            <li >
+                                    <a href="/logout" >Log Out</a>
+                            </li>
+                            </div>
 				
 			</ul>
 		</nav>
@@ -78,13 +86,14 @@ and open the template in the editor.
 			<div class="widget">
 				<h2>Employee</h2>
 				<p>
-                                    <a href="#">Employee</a>
+                                    <a href="/employee">Employee List</a><br>
+                                    <a href="/employee/new">Registration</a>
                                 </p>
 			</div>
 			<div class="widget">
 				<h2>Province</h2>
                                 <p>
-                                    <a href="#">Province</a>
+                                    <a href="#">Province List</a>
                                 </p>
 			</div>
 		</aside>
@@ -93,8 +102,8 @@ and open the template in the editor.
 		<!-- bagian konten Blog -->
 		<div class="blog">
 			<div class="conteudo">
-				<h1> List Employee </h1>
-                                <table border="1" cellpadding="10">
+				<h1 class="d-flex justify-content-center"> List Employee </h1>
+                                <table border="0" class="table table-striped">
                                     <thead>
                                         <tr style="text-align: center">
                                             <td>ID</td>
@@ -123,46 +132,14 @@ and open the template in the editor.
 			</div>
                     
 		</div>
-		<!-- akhir bagian konten Blog -->
+                <!-- akhir bagian konten Blog -->
+	<footer class="footer d-flex justify-content-center">
+            <p>FRONT-END BY JAKA ZAKI</p>
+        </footer>
+        <footer class="footer" style="background: white; height: 10px">
+            <p>FRONT-END BY JAKA ZAKI</p>
+        </footer>
 	</div>
+        
 </body>
 </html>
-
-<!--<body>
-        <div align="center">
-        <h1>Employee Data</h1>
-        
-        <div>
-            <a href="/employee/new">Add Employee</a>
-            <a href="/dashboard">Dashboard</a>
-        </div>
-        
-        <table border="1" cellpadding="10">
-            <thead>
-                <tr style="text-align: center">
-                    <td>ID</td>
-                    <td>Employee Name</td>
-                    <td>Birth Date</td>
-                    <td>Gender</td>
-                    <td>Email</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr th:each="emp : ${employees}"> emp is Objct, employees is source
-                    <td style="text-align: center" th:text="${emp.employeeId}"></td>
-                    <td th:text="${emp.employeeName}"></td>
-                    <td style="text-align: center" th:text="${emp.birthDate}"></td>
-                    <td style="text-align: center" th:text="${emp.gender}"></td>
-                    <td th:text="${emp.email}"></td>
-                    <td>
-                        <a th:href="@{/employee/{id} (id = ${emp.employeeId})}">Edit</a>
-                        <a th:href="@{/employee/delete/{id} (id = ${emp.employeeId})}">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        </div>
-    </body>-->

@@ -16,8 +16,8 @@ and open the template in the editor.
     <body>
     <!-- bagian header template -->
 	<header>
-		<h1 class="judul">Kelompok 2</h1>
-		<p class="deskripsi">JAKA ZAKI</p>
+<!--		<h1 class="judul">Kelompok 2</h1>
+		<p class="deskripsi">JAKA ZAKI</p>-->
 	</header>
 	<!-- akhir bagian header template -->
 	
@@ -25,13 +25,20 @@ and open the template in the editor.
 		<!-- bagian menu		 -->
 		<nav class="menu">
 			<ul>
-				<li>
-					<a href="/logout">Log Out</a>
-				</li>
-				<li>
-					<a href="/employee">Employee</a>
-				</li>
-				
+                            <li>
+                                    <a href="/dashboard">Dashboard</a>
+                            </li>
+                            <li>
+                                    <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                    <a href="#">Contact</a>
+                            </li>
+                            <div class="d-flex justify-content-end">
+                            <li >
+                                    <a href="/logout" >Log Out</a>
+                            </li>
+                            </div>
 			</ul>
 		</nav>
 		<!-- akhir bagian menu -->
@@ -41,13 +48,13 @@ and open the template in the editor.
 			<div class="widget">
 				<h2>Employee</h2>
 				<p>
-                                    <a href="#">Employee</a>
+                                    <a href="/employee">List of Employee</a>
                                 </p>
 			</div>
 			<div class="widget">
 				<h2>Province</h2>
                                 <p>
-                                    <a href="#">Province</a>
+                                    <a href="#">List of Province</a>
                                 </p>
 			</div>
 		</aside>
@@ -56,11 +63,17 @@ and open the template in the editor.
 		<!-- bagian konten Blog -->
 		<div class="blog">
 			<div class="conteudo">
-				<h1> Welcome To Metrodata Coding Camp 47 </h1>
-				<img src="https://s.kaskus.id/c320x320/user/avatar/2013/11/07/avatar6061759_11.gif">
+				<h1 class="d-flex justify-content-center"> Welcome To Metrodata Coding Camp 47 </h1>
+				<img src="https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/cf7b623f8414e3edc674eacbe49160c8.png">
 			</div>
 		</div>
 		<!-- akhir bagian konten Blog -->
+                <footer class="d-flex justify-content-center">
+                    <p>FRONT-END BY JAKA ZAKI</p>
+                </footer>
+                <footer class="footer" style="background: white; height: 10px">
+                    <p>FRONT-END BY JAKA ZAKI</p>
+                </footer>
 	</div>
 </body>
 </html>

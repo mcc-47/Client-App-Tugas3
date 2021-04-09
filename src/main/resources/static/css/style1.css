@@ -94,7 +94,7 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: #424246;
   padding: 30px;
   width: 90%;
   max-width: 450px;
@@ -103,46 +103,36 @@ h2 {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  color: #f1f1f1;
 }
-
-#formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
-  padding: 25px;
-  text-align: center;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
-}
-
-
 
 /* TABS */
 
-h2.inactive {
+/*h2.inactive {
   color: #cccccc;
 }
 
 h2.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
-}
+}*/
 
 
 
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #56baed;
+  background-color: #212121;
   border: none;
-  color: white;
+  color: #cccccc;
   padding: 15px 80px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(139,69,19,0.4);
+  box-shadow: 0 10px 30px 0 rgba(139,69,19,0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
@@ -154,7 +144,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #39ace7;
+  background-color: #bbb6b6;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -192,7 +182,7 @@ input[type=text]:focus {
 }
 
 input[type=text]:placeholder {
-  color: #cccccc;
+  color: #f1f1f1;
 }
 
 
@@ -223,7 +213,7 @@ input[type=password]:focus {
 }
 
 input[type=password]:placeholder {
-  color: #cccccc;
+  color: #f1f1f1;
 }
 
 /* ANIMATIONS */
@@ -321,7 +311,7 @@ input[type=password]:placeholder {
 }
 
 .underlineHover:hover {
-  color: #0d0d0d;
+  color: #bbb6b6;
 }
 
 .underlineHover:hover:after{

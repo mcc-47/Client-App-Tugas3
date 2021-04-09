@@ -5,34 +5,60 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head >
+    <head>
         <title>LOGIN PAGE</title>
         <link th:href="@{/css/style1.css}" rel="stylesheet">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <meta ch <liarset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+              integrity="ha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+              rel="stylesheet" crossorigin="anonymous">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <style>
+            body {
+              font-family: "Poppins", sans-serif;
+              height: 100vh;
+              background: #bbb6b6;
+            }
+            h2 {
+              text-align: center;
+              font-size: 32px;
+              font-weight: 600;
+              text-transform: uppercase;
+              display:inline-block;
+              margin: 40px 8px 10px 8px; 
+              color: #cccccc;
+            }
+        </style>
     </head>
-    <body class="html">
-         <div class="wrapper fadeInDown">
+    <body>
+        <div class="wrapper fadeInDown">
             <div id="formContent">
-              <h2 class="active"> MCC 47</h2>
-              
-              <p th:text="${param.error} ? 'Username or password incorrect' : ''"></p>
-              <p th:text="${param.logout} ? 'You have been logged out' : ''"></p>
-              <form th:action="@{/login}" method="post" th:object="${auth}" class="needs-validation" novalidate>
-                <input type="text" id="validationCustom01" class="fadeIn second form-control" th:field="*{userName}" placeholder="username" required>
-                <div class="invalid-feedback" style="color: red" >
-                        <b>Please input a username.</b>
+                <h2 class="fadeIn first">METRODATA CODING CAMP BATCH 47</h2>
+                <p th:text="${param.error} ? 'incorrect username or password':''"
+                    class="fadeIn first" style="color: red"></p>
+                <p th:text="${param.logout} ? 'logged out from this site':''"
+                    class="fadeIn first" style="color: gray"></p>
+                <form th:action="@{/login}" method="post" th:object="${auth}"
+                    class="needs-validation" novalidate>
+                    <div>
+                        <input type="text" th:field="*{userName}" 
+                           placeholder="username" class="fadeIn second form-control" required>
+                        <div class="invalid-feedback" >
+                            please insert username...
+                        </div>
                     </div>
-                <input type="password" id="userPassword" class="fadeIn third form-control" th:field="*{userPassword}" placeholder="password" required>
-                <div class="invalid-feedback" style="color: red" >
-                        <b>Please input a password.</b>
+                    <div>
+                        <input type="password" th:field="*{userPassword}" 
+                           placeholder="password" class="fadeIn third form-control" required>
+                        <div class="invalid-feedback" >
+                            please insert password...
+                        </div>
                     </div>
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                    <input type="submit" class="fadeIn fourth" value="LOG IN">
               </form>
             </div>
-             <script>
+        </div>
+        <script>
             (function() {
             'use strict';
             window.addEventListener('load', function() {

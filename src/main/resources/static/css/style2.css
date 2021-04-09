@@ -36,19 +36,31 @@ header .deskripsi{
 }
  
 .wrap {
-	width: 950px;
+	width: 1300px;
 	margin:25px auto;
 }
  
+footer{
+    overflow:hidden;
+    color:#fff;
+    float:left;
+    padding:0;
+    width: 1000px;
+    margin:0 50px 0 0;
+    background: #424246;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
+    -moz-box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
+    box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
+}
 nav.menu ul {
 	overflow:hidden;
 	color:#fff;
 	list-style: none;
 	float:left;
 	padding:0;
-	width: 650px;
+	width: 1000px;
 	margin:0 0 0;
-	background: #1abc9c;
+	background: #424246;
 	-webkit-box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
 	-moz-box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
 	box-shadow: 1px 1px 1px 0px rgba(204,204,204,0.55);
@@ -72,7 +84,7 @@ nav.menu ul a {
  
 nav.menu ul a:hover {
 	text-decoration: underline;
-	background:#16a085;
+	background:#212121;
 }
  
 .sidebar {
@@ -114,7 +126,7 @@ nav.menu ul a:hover {
 }
  
 .conteudo {
-	width:650px;
+	width:1000px;
 	padding:25px;
 	margin:25px auto;
 	background: #fff;
@@ -125,9 +137,9 @@ nav.menu ul a:hover {
 }
  
 .conteudo img {
-	min-width: 650px;
-	margin:0 0 25px -25px;
-	max-width: 650px;
+	min-width: 400px;
+	margin:10px 0 0 300px; 
+	max-width: 400px;
 }
  
 .conteudo h1 {
@@ -231,6 +243,10 @@ nav.menu ul a:hover {
 	nav.menu ul a {
 		padding:15px;
 		font-size: 14px;
+	}
+        
+	footer {
+		width: 100%;
 	}
  
 	.sidebar {
