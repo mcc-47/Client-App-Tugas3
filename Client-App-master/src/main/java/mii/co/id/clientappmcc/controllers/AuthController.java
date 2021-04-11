@@ -38,18 +38,10 @@ public class AuthController {
             /* The user is logged in :) */
             return "redirect:/dashboard";
         }
-
         AuthRequest auth = new AuthRequest();
         model.addAttribute("auth", auth);
         return "login";
     }
-
-//    @GetMapping("/login")
-//    public String loginPage(Model model) {
-//        AuthRequest auth = new AuthRequest();
-//        model.addAttribute("auth", auth);
-//        return "login";
-//    }
 
     @PostMapping("/login")
     public String loginProcess(@ModelAttribute("auth") AuthRequest auth) {
@@ -60,7 +52,6 @@ public class AuthController {
         } else {
             redirectUrl = "redirect:/login?error";
         }
-
         return redirectUrl;
     }
 

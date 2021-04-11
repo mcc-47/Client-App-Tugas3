@@ -1,0 +1,17 @@
+<div id='head' th:fragment="header">
+    <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark" style="height: 100%">
+        <li class="nav-item active">
+            <a class="navbar-brand" th:href="@{/login}">KELOMPOK 3 - MCC 47</a>
+        </li>
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/dashboard}">Dashboard<span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/logout">
+            <button class="btn btn-outline-success my-2 my-sm-0"  type="submit" >Logout</button>
+        </form>
+    </nav>
+</div>
