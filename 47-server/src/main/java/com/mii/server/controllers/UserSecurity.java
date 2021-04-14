@@ -5,6 +5,7 @@
  */
 package com.mii.server.controllers;
 
+import com.mii.server.dto.AuthDTO;
 import com.mii.server.dto.DataLoginDTO;
 import com.mii.server.dto.LoginDTO;
 import com.mii.server.services.LoginService;
@@ -50,15 +51,41 @@ public class UserSecurity {
 //        return loginService.loginDTO(loginService.loadByUserName("zaki_10","zaki123"));
 //    }
     
-    @PostMapping("/login")
-    public LoginDTO loginController(@RequestBody DataLoginDTO dataLoginDTO) {
-//        return myUserDetailsServiceImpl.loadByUserName("ikhsan_1", "ikhsan123");
-        return loginService.loginDTO(loginService.loadByUserName(dataLoginDTO.getUserName(),
-                dataLoginDTO.getUserPassword()));
+//    @PostMapping("/login")
+//    public LoginDTO loginController(@RequestBody DataLoginDTO dataLoginDTO) {
+////        return myUserDetailsServiceImpl.loadByUserName("ikhsan_1", "ikhsan123");
+//        return loginService.loginDTO(loginService.loadByUserName(dataLoginDTO.getUserName(),
+//                dataLoginDTO.getUserPassword()));
+//    }
+    
+//    @GetMapping("/user")
+//    public String logIn(@RequestBody DataLoginDTO dataLoginDTO){
+//        return loginService.logIn(dataLoginDTO.getUserName(), dataLoginDTO.getUserPassword());
+//    }
+    
+    @PostMapping("/loginuser")
+    public AuthDTO userNameLogin(@RequestBody DataLoginDTO userLoginDto)throws Exception{
+        return loginService.loginUserByUserPassword(userLoginDto);
     }
     
-    @GetMapping("/user")
-    public String logIn(@RequestBody DataLoginDTO dataLoginDTO){
-        return loginService.logIn(dataLoginDTO.getUserName(), dataLoginDTO.getUserPassword());
+    @GetMapping("/trainer")
+    public String trainer(){
+        return "Trainer session";
     }
+    
+    @GetMapping("/trainee")
+    public String trainee(){
+        return "Trainee session";
+    }
+    
+    @GetMapping("/admin")
+    public String admin(){
+        return "Admin session";
+    }
+//    @PreAuthorize("hasRole('admin')")
+//    @PostMapping("/loginuser")
+//    public String loginfull(@RequestBody DataLoginDTO dataLoginDTO) {
+//        return loginService.logInRole(dataLoginDTO.getUserName(),
+//                dataLoginDTO.getUserPassword());
+//    }
 }
