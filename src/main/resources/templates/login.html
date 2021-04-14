@@ -7,6 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>LOGIN PAGE</title>
+        <!--IMPORT-->
         <link th:href="@{/css/style1.css}" rel="stylesheet">
         <div th:replace="layout/headerlink :: head-link"></div>
         <style>
@@ -51,7 +52,7 @@ and open the template in the editor.
                         </div>
                     </div>
                     <input type="submit" class="fadeIn fourth" value="LOG IN" onclick="login()">
-              </form>
+                </form>
             </div>
         </div>
         <script>
@@ -75,30 +76,3 @@ and open the template in the editor.
         </script>
     </body>
 </html>
-<!--
-        <div class="wrapper">
-            <div class="container">
-              
-              <p th:text="${param.error} ? 'Username or password incorrect' : ''"></p>
-              <p th:text="${param.logout} ? 'You have been logged out' : ''"></p>
-              <form th:action="@{/login}" method="post" th:object="${auth}" class="needs-validation">
-                  <h2 class="title"> MCC 47</h2><br>
-                  <div class="form-group">
-                    <input type="text" th:field="*{userName}" placeholder="username" class="form-control" required>
-                    <div class="invalid-feedback">
-                      Please enter your username.
-                    </div>
-                  </div><br>
-                  <div class="form-group">
-                    <input type="password" th:field="*{userPassword}" placeholder="password" class="form-control" required>
-                    <div class="invalid-feedback">
-                      Please enter your password.
-                    </div>
-                  </div><br>
-                  </div>
-                    <input type="submit" value="Log In">
-                <button type="submit" class="btn btn-secondary">Log In</button>
-              </form>
-
-            </div>
-        </div>-->
