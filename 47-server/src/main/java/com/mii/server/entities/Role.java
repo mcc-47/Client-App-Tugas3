@@ -5,9 +5,8 @@
  */
 package com.mii.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,21 +44,15 @@ public class Role implements Serializable {
         @JoinColumn(name = "role_id", referencedColumnName = "role_id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Users> usersCollection;
-    @ManyToMany(mappedBy = "roleCollection", fetch = FetchType.EAGER)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Privileges> privilegesCollection;
+    private List<Users> usersList;
+    @ManyToMany(mappedBy = "roleList", fetch = FetchType.LAZY)
+    private List<Privileges> privilegesList;
 
     public Role() {
     }
 
     public Role(Integer roleId) {
         this.roleId = roleId;
-    }
-
-    public Role(String roleName) {
-        this.roleName = roleName;
     }
 
     public Role(Integer roleId, String roleName) {
@@ -84,21 +77,21 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
+    public List<Users> getUsersList() {
+        return usersList;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
     }
 
     @XmlTransient
-    public Collection<Privileges> getPrivilegesCollection() {
-        return privilegesCollection;
+    public List<Privileges> getPrivilegesList() {
+        return privilegesList;
     }
 
-    public void setPrivilegesCollection(Collection<Privileges> privilegesCollection) {
-        this.privilegesCollection = privilegesCollection;
+    public void setPrivilegesList(List<Privileges> privilegesList) {
+        this.privilegesList = privilegesList;
     }
 
     @Override
@@ -123,7 +116,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Role[ roleId=" + roleId + " ]";
+        return "com.mii.server.entities.Role[ roleId=" + roleId + " ]";
     }
     
 }

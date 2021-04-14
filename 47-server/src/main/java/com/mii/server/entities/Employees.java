@@ -5,7 +5,7 @@
  */
 package com.mii.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -56,21 +58,11 @@ public class Employees implements Serializable {
     @Column(name = "email")
     private String email;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employees", fetch = FetchType.LAZY)
-    @Basic(optional = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Addresses addresses;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employees", fetch = FetchType.LAZY)
-    @Basic(optional = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Educations educations;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employees", fetch = FetchType.LAZY)
-    @Basic(optional = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Contacts contacts;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employees", fetch = FetchType.LAZY)
-    @Basic(optional = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Users users;
 
     public Employees() {
     }
@@ -79,8 +71,7 @@ public class Employees implements Serializable {
         this.employeeId = employeeId;
     }
 
-
-    public Employees(String prefix, Integer employeeId, String employeeName, Date birthDate, String gender, String email, Addresses addresses, Educations educations, Contacts contacts, Users users) {
+    public Employees(String prefix, Integer employeeId, String employeeName, Date birthDate, String gender, String email, Addresses addresses, Educations educations, Contacts contacts) {
         this.prefix = prefix;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
@@ -90,7 +81,6 @@ public class Employees implements Serializable {
         this.addresses = addresses;
         this.educations = educations;
         this.contacts = contacts;
-        this.users = users;
     }
 
 
@@ -169,16 +159,6 @@ public class Employees implements Serializable {
     public void setContacts(Contacts contacts) {
         this.contacts = contacts;
     }
-
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-    
-    
 
     @Override
     public int hashCode() {

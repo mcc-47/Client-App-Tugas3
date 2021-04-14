@@ -5,9 +5,8 @@
  */
 package com.mii.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,8 +44,7 @@ public class Privileges implements Serializable {
         @JoinColumn(name = "privilege_id", referencedColumnName = "privilege_id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Role> roleCollection;
+    private List<Role> roleList;
 
     public Privileges() {
     }
@@ -77,12 +75,12 @@ public class Privileges implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Role> getRoleCollection() {
-        return roleCollection;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoleCollection(Collection<Role> roleCollection) {
-        this.roleCollection = roleCollection;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
     @Override
@@ -107,7 +105,7 @@ public class Privileges implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Privileges[ privilegeId=" + privilegeId + " ]";
+        return "com.mii.server.entities.Privileges[ privilegeId=" + privilegeId + " ]";
     }
     
 }

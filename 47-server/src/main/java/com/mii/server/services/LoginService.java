@@ -5,8 +5,6 @@
  */
 package com.mii.server.services;
 
-import com.mii.server.dto.AuthDTO;
-import com.mii.server.dto.DataLoginDTO;
 import com.mii.server.dto.LoginDTO;
 import com.mii.server.entities.Privileges;
 import com.mii.server.entities.Role;
@@ -14,66 +12,106 @@ import com.mii.server.entities.Users;
 import com.mii.server.repositories.RoleRepository;
 import com.mii.server.repositories.UserRepository;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Zahra
  */
-    
-    @Service
+@Service
 public class LoginService implements UserDetailsService{
-
-    @Autowired 
-    UserRepository userRepository;
-    
     @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+//    @Autowired
+//    private UserManagementService userManagementService;
+
+//    public boolean loadByUserName(String userName){
+//        Users user = userRepository.findByUserName(userName);
+//        if(user==null){
+//            throw new UsernameNotFoundException("username not found");
+////            return false;
+//        }
+//        else{
+//            return true;
+//        }
+//    }
     
     @Override
-    public Users loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername (String userName){
         Users user = userRepository.findByUserName(userName);
-        if (user==null) {
-            throw new UnsupportedOperationException("User Name NOT FOUND");
+        if(user==null){
+            throw new UsernameNotFoundException("USERNAME NOT FOUND");
         }
-        return user;
+        else{
+            return user;
+        }
     }
     
-    public AuthDTO loginUserByUserPassword(DataLoginDTO userLoginDto)throws Exception{
-        Users user = loadUserByUsername(userLoginDto.getUserName());
-        if (!(passwordEncoder.matches(userLoginDto.getUserPassword(), user.getPassword()))) {
-            throw new Exception("Wrong Pasword");
+    public String logIn(String userName, String userPassword){
+        Users user = userRepository.findByUserName(userName);
+        if(user==null){
+            throw new UsernameNotFoundException("Username not found");
+        } else{
+            if(!user.getPassword().equals(userPassword)){
+                return "password salah";
+            } else{
+                return "Log In Berhasil";
+            }
         }
-        //untuk setting session dan atau cookies
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                                                            userLoginDto.getUserName(),        //principal, credential, atoritas yg disimpen pada sesi tsb
-                                                            userLoginDto.getUserPassword(), 
-                                                            user.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authToken); //beneran set session
-        List<String> grantedAuth = new ArrayList<>();
-        for (GrantedAuthority auth : user.getAuthorities()) { //loop utk get otoritas dalam list<String>
-            grantedAuth.add(auth.getAuthority());
+    }
+        
+    public LoginDTO loginDTO(String userName) {
+        Users user = new Users();
+        Integer userId = userRepository.findByUserName(userName).getUserId();
+        List<Role> roles = userRepository.findByUserName(userName).getRoleList();
+        List<String> privilegeNames = new ArrayList<>();
+        List<String> roleNames = new ArrayList<>();
+
+        for (Role r : roles) {
+            roleNames.add(r.getRoleName());
+            List<Privileges> privileges = roleRepository.findByRoleName(r.getRoleName()).getPrivilegesList();
+            for (Privileges p : privileges) {
+                privilegeNames.add(p.getPrivilegeName());
+            }
         }
-        return new AuthDTO(user.getUsername(),user.getUserId(), grantedAuth);
+
+        LoginDTO nreg = new LoginDTO(userName,
+                roleNames,
+                privilegeNames);
+        return nreg;
+    }
+    
+    public String loadByUserName(String userName, String userPassword) {
+        Users userDB = userRepository.findByUserName(userName);
+        Users user = new Users();
+        if (userDB == null) {
+            throw new UsernameNotFoundException("username not found");
+        } else {
+            if (!userDB.getPassword().equals(userPassword)) {
+            } else {
+//                UsernamePasswordAuthenticationToken authToken
+//                        = new UsernamePasswordAuthenticationToken(userDB.getUsername(),
+//                                userDB.getPassword(), user.getAuthorities());
+//                SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("berhasil ditampilkan");
+            }
+            return userDB.getUsername();
+//            return userDB.getUserId();
+        }
     }
     
     
-    
-    public Users insert(Users user){
-        user.setUserPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoleCollection(Arrays.asList(new Role(3)));
-        return userRepository.save(user);
-    }
+//    UserDetails loadUserByUserName (String userName) throws UsernameNotFoundException{
+//        
+//    }
+
 }

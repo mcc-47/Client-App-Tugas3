@@ -6,7 +6,6 @@
 package com.mii.server.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,8 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -51,29 +47,13 @@ public class Users implements UserDetails {
     @Basic(optional = false)
     @Column(name = "user_password")
     private String userPassword;
-    
-//    @Basic(optional = true)
-//    @Column(name = "isAccountNonExpired")
-//    private boolean isAccountNonExpired = true;
-//    @Basic(optional = true)
-//    @Column(name = "isAccountNonLocked")
-//    private boolean isAccountNonLocked = true;
-//    @Basic(optional = true)
-//    @Column(name = "isCredentialsNonExpired")
-//    private boolean isCredentialsNonExpired = true;
-//    @Basic(optional = true)
-//    @Column(name = "isEnabled")
-//    private boolean isEnabled = true;
-    
+    @ManyToMany(mappedBy = "usersList", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Role> roleList;
     @JoinColumn(name = "user_id", referencedColumnName = "employee_id", insertable = false, updatable = false)
-    @OneToOne(optional = true, fetch = FetchType.EAGER)
-    private Employees employees;
-    @JoinTable(name="user_role", joinColumns = {
-        @JoinColumn(name="user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
-        @JoinColumn(name="role_id", referencedColumnName = "role_id")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Basic(optional = true)
-    private Collection<Role> roleCollection;
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+//    @JsonBackReference
+    private Employees employee;
 
     public Users() {
     }
@@ -88,20 +68,6 @@ public class Users implements UserDetails {
         this.userPassword = userPassword;
     }
 
-    public Users(Integer userId, String userName, String userPassword, Collection<Role> roleCollection) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.roleCollection = roleCollection;
-    }
-
-    public Users(String userName, Integer userId,  Collection<Role> roleCollection) {
-        this.userId = userId;
-        this.userName = userName;
-        this.roleCollection = roleCollection;
-    }
-    
-
     public Integer getUserId() {
         return userId;
     }
@@ -110,29 +76,29 @@ public class Users implements UserDetails {
         this.userId = userId;
     }
 
-//    public String getUserName() {
-//        return userName;
-//    }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-//    public String getUserPassword() {
-//        return userPassword;
-//    }
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
 
     @XmlTransient
-    public Collection<Role> getRoleCollection() {
-        return roleCollection;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoleCollection(Collection<Role> roleCollection) {
-        this.roleCollection = roleCollection;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -157,55 +123,46 @@ public class Users implements UserDetails {
 
     @Override
     public String toString() {
-        return "com.entities.Users[ userId=" + userId + " ]";
+        return "com.mii.server.entities.Users[ userId=" + userId + " ]";
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<Role> roles = getRoleCollection();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (Role r : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+r.getRoleName().toUpperCase()));
-            Collection<Privileges> privileges = r.getPrivilegesCollection();
-            for (Privileges p : privileges) {
-                authorities.add(new SimpleGrantedAuthority(p.getPrivilegeName().toUpperCase()));
-            }
-        }
+        Users user = new Users();
+        String[] userRoles = user.getRoleList().stream().map((role) -> role.getRoleName()).toArray(String[]::new);
+        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return this.userPassword;
+        return userPassword;
     }
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return userName;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
-//        return this.isAccountNonExpired;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
-//        return this.isAccountNonLocked;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
-//        return this.isCredentialsNonExpired;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
-//        return this.isEnabled;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
+
