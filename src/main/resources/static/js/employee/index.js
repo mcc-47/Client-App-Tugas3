@@ -83,11 +83,11 @@ function createEmployee() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         error: function (errrrrr) {
-            setInterval('location.reload()', 1500);
+            setInterval('location.reload()', 1000);
         },
         success: (res) => {
             console.log("Success");
-            setInterval('location.reload()', 1500);
+            setInterval('location.reload()', 1000);
         }
     });
 }
@@ -111,7 +111,7 @@ function updateEmployee(){
         dataType: "json",
         success: (res) => {
             console.log("Success");
-            setInterval('location.reload()', 1500);
+            setInterval('location.reload()', 1000);
         }
     });
 }
@@ -124,7 +124,7 @@ function deleteEmployee(id) {
         type: 'DELETE',
         error: () => {
             console.log(id);
-            setInterval('location.reload()', 1500);
+            setInterval('location.reload()', 1000);
         }
     });
 }

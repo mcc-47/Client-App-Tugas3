@@ -45,7 +45,6 @@ public class EmployeeController {
     
     @GetMapping("/{id}")
     public @ResponseBody Employee getById(@PathVariable("id") Integer id) {
-//        model.addAttribute("employees", employeeContactService.getById(id));
         return employeeContactService.getById(id);
     }
     
