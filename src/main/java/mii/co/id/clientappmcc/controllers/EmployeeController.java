@@ -46,6 +46,7 @@ public class EmployeeController {
     public @ResponseBody List<Employee> getAllProcess() {
         return employeeContactService.getAll();
     }
+    
     @GetMapping("/{id}")
     public @ResponseBody Employee getById(@PathVariable("id") Integer id) {
 //        model.addAttribute("employees", employeeContactService.getById(id));

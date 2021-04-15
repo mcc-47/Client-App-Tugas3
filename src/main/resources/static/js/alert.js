@@ -6,10 +6,8 @@ function cekId(){
 }
 
 //DELETE BUTTON
-function onClickDelete(){
-    event.preventDefault();
-    let del = $('#del').attr('href');
-    console.log(del);
+function onClickDelete(id){
+//    event.preventDefault();
     
     Swal.fire({
         title: 'Are you sure?',
@@ -21,6 +19,7 @@ function onClickDelete(){
         confirmButtonText:'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+                
                 const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -32,12 +31,13 @@ function onClickDelete(){
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
                 })
-
                 Toast.fire({
                     icon: 'success',
-                    title: 'Signed Out successfully'
+                    title: 'deleted'
                 })
-                document.location.href = del;
+                
+                deleteEmployee(id);
+                
                 }
         });
 }

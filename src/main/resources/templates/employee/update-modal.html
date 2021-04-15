@@ -10,13 +10,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post" class="needs-validation" 
+                    <form action="#" method="put" class="needs-validation" 
                           novalidate id="update">           
                         <table>
                             <tr>
                                 <div class="form-group">
                                     <td><label>Employee Id</label></td>
-                                    <td><input type="number" id="employeeId" 
+                                    <td><input type="number" id="employeeId" readonly="readonly"
                                                class="form-control" required>
                                     <div class="invalid-feedback">
                                         This field is required.
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td><input type="submit" class="btn btn-primary" 
-                                           value="Submit" onclick='onClickChange()'>
+                                           value="Submit" onclick="onClickChange()">
                                 </td>
                             </tr>
                         </table>
