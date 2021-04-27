@@ -161,6 +161,9 @@ function deleteEmployee(id) {
         success: (res) => {
             table.ajax.reload();
             deleteSuccessAlert();
+        },
+        error: function (err) {
+            errorAlert();
         }
     });
 }
